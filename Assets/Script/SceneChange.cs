@@ -21,6 +21,6 @@ public class SceneChange : MonoBehaviour {
 
     public void SceneLoad()
     {
-        Application.LoadLevel("stage1");
+        Application.LoadLevel("1PStage");
     }
 }

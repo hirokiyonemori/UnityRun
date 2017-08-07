@@ -104,10 +104,88 @@ public class UnityChanController : MonoBehaviour
     private int spType = 2;
     private int []waitTime = { 200, 100, 50, 20, 10 };
 
+	private Vector3 touchStartPos;
+	private Vector3 touchEndPos;
+
+	void GetDirection(){
+		float directionX = touchEndPos.x - touchStartPos.x;
+		float directionY = touchEndPos.y - touchStartPos.y;
+		string Direction = "";
+
+		if (Mathf.Abs (directionY) < Mathf.Abs (directionX)) {
+			if (30 < directionX) {
+				//右向きにフリック
+				Direction = "right";
+			} else if (-30 > directionX) {
+				//左向きにフリック
+				Direction = "left";
+			}
+		} else if (Mathf.Abs (directionX) < Mathf.Abs (directionY)) {
+			if (30 < directionY) {
+				//上向きにフリック
+				Direction = "up";
+			} else if (-30 > directionY) {
+				//下向きのフリック
+				Direction = "down";
+			}
+		} else {
+			//タッチを検出
+			Direction = "touch";
+		}
+		switch (Direction) {
+		case "up":
+			//上フリックされた時の処理
+			break;
+
+		case "down":
+			//下フリックされた時の処理
+			break;
+
+		case "right":
+			//右フリックされた時の処理
+			if (!cpnflg)
+				Right (); //右移動
+			break;
+
+		case "left":
+			//左フリックされた時の処理
+			if (!cpnflg)
+				Left (); //左移動
+			break;
+
+		case "touch":
+			 //タッチされた時の処理
+			if (jumppingFlug
+			   || (jampFlag && jumppingFlug)) {
+				jampFlag = false;
+				Jump ();
+			}
+			break;
+		}
+	
+	}
+
+
     void FixedUpdate()
     {
         
-        
+		if (Input.GetKeyDown(KeyCode.Mouse0)){
+			touchStartPos = new Vector3(Input.mousePosition.x,
+				Input.mousePosition.y,
+				Input.mousePosition.z);
+		}
+
+		//if (Input.GetMouseButtonDown (KeyCode.Mouse0)) {
+		//	Debug.Log ("マウス押しっぱなし");
+
+	//	}
+		if (Input.GetKeyUp(KeyCode.Mouse0)){
+			touchEndPos = new Vector3(Input.mousePosition.x,
+				Input.mousePosition.y,
+				Input.mousePosition.z);
+			GetDirection();	
+		}
+
 
         if (!Field.startFlg) return;
 
