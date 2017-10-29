@@ -16,20 +16,21 @@ public class MyCameraController : MonoBehaviour {
     {
         Camera camera = this.GetComponent<Camera>();
         //Debug.Log(" Field.plyNum =" + Field.plyNum);
-        if(Field.plyNum == 1)
-        {
-            camera.rect = new Rect(0, 0, 1, 1);
-            if( no == 1 )camera.enabled = false;
-        }
-        else
-        {
-            float x = 0.0f;//カメラのｘ座標
-            if( no == 1)
-            {
-                x = 0.5f;
-            }
-            camera.rect = new Rect(x, 0, 0.5f, 1);
-        }
+        camera.rect = new Rect(0, 0, 1, 1);
+//if (Field.plyNum == 1)
+//{
+//    camera.rect = new Rect(0, 0, 1, 1);
+//    if( no == 1 )camera.enabled = false;
+//}
+//else
+//{
+//    float x = 0.0f;//カメラのｘ座標
+//    if( no == 1)
+//    {
+//        x = 0.5f;
+//    }
+//    camera.rect = new Rect(x, 0, 0.5f, 1);
+//}
         
 //  if( no == 0)
 //  {

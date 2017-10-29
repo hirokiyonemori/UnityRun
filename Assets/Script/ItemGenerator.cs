@@ -9,12 +9,12 @@ public class ItemGenerator : MonoBehaviour
     public GameObject coinPrefab;
     //cornPrefabを入れる
     public GameObject conePrefab;
-
-    //public フィールド ;
-    public GameObject FieldGameObj;
-
-    //public フィールド ;
-    private GameObject Bomb;
+    //コース;
+    public GameObject stageGameObj;
+    //Course
+    public GameObject courseObj;
+    //ゴールのオブジェクト
+    public GameObject goalObj;
 
     //スタート地点
     private int startPos = -500;
@@ -27,18 +27,23 @@ public class ItemGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Bomb = (GameObject)Resources.Load("Prefabs/Bomb");
-        
-        for( int i =0; i < 4; i ++)
+        GameObject filedobj;
+        //コースを生成
+        for ( int i =0; i < 10 + Field.retryCnt; i ++)
         {
-            GameObject cone = Instantiate(FieldGameObj) as GameObject;
-            cone.transform.position = new Vector3(-50, -0.5f, -400 + i * 100 );
-            
-            //GameObject GameBomb = Instantiate(Bomb) as GameObject;
-            //GameBomb.transform.position = new Vector3(-50, -0.5f, -400 + i * 100);
-            //  cone.transform.parent = obj.transform;
+            filedobj = Instantiate(stageGameObj) as GameObject;
+            filedobj.transform.position = new Vector3(-50, -0.5f, -400 + i * 100 );
+
+            filedobj = Instantiate(courseObj) as GameObject;
+            filedobj.transform.position = new Vector3(0, 0, -350 + i * 100);
+
         }
-        
+        filedobj = Instantiate(goalObj) as GameObject;
+        filedobj.transform.position = new Vector3(0, 2.5f, 2 + Field.retryCnt * 100);
+        for( int i = 0; i < 4 + Field.retryCnt; i ++)
+        {
+            createItem(-400 + i * 100);
+        }
 
     }
 
@@ -52,9 +57,9 @@ public class ItemGenerator : MonoBehaviour
         Destroy(obj);
     }
     
-    public void createItem(float z)
+    public void createItem(int z)
     {
-        int startPos = (int)z;
+        int startPos = z;
 
         goalPos = startPos + 50;
         obj = new GameObject();
@@ -107,14 +112,15 @@ public class ItemGenerator : MonoBehaviour
                             car.transform.Rotate(new Vector3(0.0f, 90.0f, 0.0f));
                         }
                         car.transform.parent = obj.transform;
-                    }else
-                    {
-                        
-                        
-                        GameObject GameBomb = Instantiate(Bomb) as GameObject;
-                        GameBomb.transform.position = new Vector3(posRange * j, GameBomb.transform.position.y, i + offsetZ);
-                        GameBomb.transform.parent = obj.transform;
                     }
+//else
+//{
+//    
+//    
+//    //GameObject GameBomb = Instantiate(Bomb) as GameObject;
+//    //GameBomb.transform.position = new Vector3(posRange * j, GameBomb.transform.position.y, i + offsetZ);
+//    //GameBomb.transform.parent = obj.transform;
+//}
                 }
             }
         }

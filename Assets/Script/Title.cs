@@ -15,6 +15,33 @@ public class Title : MonoBehaviour {
     private bool upKeyFlg = false;
     private bool downKeyFlg = false;
 
+
+    public void SceneEasy()
+    {
+        Field.gameDif = 0;
+        Field.retryCnt = 0;
+        Application.LoadLevel("1PStage");
+    }
+
+    public void SceneNormal()
+    {
+        Field.gameDif = 1;
+        Field.retryCnt = 0;
+        Application.LoadLevel("1PStage");
+    }
+
+    public void SceneHard()
+    {
+        Field.gameDif = 2;
+        Field.retryCnt = 0;
+        Application.LoadLevel("1PStage");
+    }
+
+    public void EndGame()
+    {
+        Application.Quit();
+    }
+
     // Use this for initialization
     void Start () {
         titleButton = GameObject.Find("Button");
@@ -23,7 +50,7 @@ public class Title : MonoBehaviour {
         Button target = null;
         foreach (Transform child in canvas.transform)
         {
-            Debug.Log("" + child.name);
+            //Debug.Log("" + child.name);
             if (child.name == "Button")
             {
                 target = child.gameObject.GetComponent<Button>();
@@ -94,7 +121,7 @@ public class Title : MonoBehaviour {
         {
             
             select_no--;
-            Debug.Log("select_no " + select_no);
+            //Debug.Log("select_no " + select_no);
             if (select_no <= 0) select_no = 0;
             upKeyFlg = true;
 
@@ -107,7 +134,7 @@ public class Title : MonoBehaviour {
             select_no++;
             if (select_no >= 2) select_no = 2;
 
-            Debug.Log("select_no " + select_no);
+            //Debug.Log("select_no " + select_no);
             downKeyFlg = false;
 
         }
@@ -132,16 +159,18 @@ public class Title : MonoBehaviour {
                 Field.gameDif = select_no;
                 switch ( select_no)
                 {
-                    case 0:
-                        Application.LoadLevel("Stage1");
-                        break;
-                    case 1:
-                        Application.LoadLevel("1PStage");
-                        break;
-                    case 2:
-                        Application.LoadLevel("Stage3");
-                        break;
+                    //    case 0:
+                    //        Application.LoadLevel("Stage1");
+                    //        break;
+                    //    case 1:
+                    //        Application.LoadLevel("1PStage");
+                    //        break;
+                    //    case 2:
+                    //        Application.LoadLevel("Stage3");
+                    //        break;
+                            
                 }
+                Application.LoadLevel("1PStage");
             }
         }
         
